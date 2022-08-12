@@ -35,7 +35,7 @@ function writePassword() {
 
 }
 
-// Add event listener to generate button
+// Event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
 
@@ -54,7 +54,7 @@ var UpperCaseCount = "";
 var numbersCount = "";
 var specialCharactersCount="";
 
-
+// If statements for each Character type: //
   
 if (lowerCaseUser) {
   lowerCaseCount = randomLowerCase;
@@ -76,6 +76,19 @@ if (specialCharactersUser){
   passwordCount++;
 }
 
+
+// Get random Characters:
+
+
+var randomPassword = "";
+
+for (var i = 0; i < length; i++) {
+  var randomCharacters = Math.floor(Math.random() * 4);
+
+  randomPassword += randomCharacters;
+}
+
+return randomPassword;
 
 }
 
