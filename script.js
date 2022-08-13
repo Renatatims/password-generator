@@ -83,31 +83,49 @@ if (specialCharactersUser){
 }
 
 
-// Loop to get random Characters:
 
+// Loop to get random Characters:
 
 var randomPassword = "";
 
-for (var i = 0; i < (passwordLength - passwordCount); i++) {
-  var randomCharacters = Math.floor(Math.random() * passwordCount);
+for (var i = 0; i < passwordLength - passwordCount; i++) {
 
-  randomPassword += randomCharacters;
-}
+//* Included an if statement in case the user decides not to include Numbers in the password *//  
+
+  if (numbersUser===false) {
+    var randomNoNumber = lowerCase[Math.floor(Math.random() * lowerCase.length)]
+    randomPassword += randomNoNumber;
+
+  } else {
+    var randomCharacters = numbers[Math.floor(Math.random() * numbers.length)];
+    randomPassword += randomCharacters;
+  }
+         
+  }
 
 // LowerCase, Upper Case and Special Characters inside the Password //
+  randomPassword += lowerCaseCount;
+  randomPassword += UpperCaseCount;
+  randomPassword += numbersCount;
+  randomPassword += specialCharactersCount;
 
-randomPassword += lowerCaseCount;
-randomPassword += UpperCaseCount;
-randomPassword += numbersCount;
-randomPassword += specialCharactersCount;
-
-return randomPassword;
-
+  return randomPassword;
 }
 
 
 
 
+
+
+//for (var i = 0; i < (passwordLength - passwordCount); i++);
+ // if (!numbersUser){
+//    var randomNoNumber = lowerCase[Math.floor(Math.random() * lowerCase.length)];
+  
+//    randomPassword += randomNoNumber;
+
+  
+//} else { 
+//  var randomCharacters = Math.floor(Math.random() * 10);
 
 
 
