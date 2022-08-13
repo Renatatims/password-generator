@@ -92,11 +92,25 @@ for (var i = 0; i < passwordLength - passwordCount; i++) {
 
 //* Included an if statement in case the user decides not to include Numbers in the password *//  
 
-  if (numbersUser===false) {
+  if (numbersUser===false && lowerCaseUser===true) {
     var randomNoNumber = lowerCase[Math.floor(Math.random() * lowerCase.length)]
     randomPassword += randomNoNumber;
 
-  } else {
+//* Included another if statement in case user decides not to include Numbers and Lower Case
+
+  } else if (lowerCaseUser===false && numbersUser===false && UpperCaseUser===true ) {
+    var randomNoNumberLower = UpperCase[Math.floor(Math.random() * UpperCase.length)]
+    randomPassword += randomNoNumberLower;
+
+
+//* If statement in case user decides to include ONLY special charcaters
+
+  } else if (lowerCaseUser===false && numbersUser===false && UpperCaseUser===false) {
+    var randomOnlySpecial = specialCharacters[Math.floor(Math.random() * specialCharacters.length)]
+    randomPassword += randomOnlySpecial;
+
+//* Else - for all the other alternatives
+  } else{
     var randomCharacters = numbers[Math.floor(Math.random() * numbers.length)];
     randomPassword += randomCharacters;
   }
