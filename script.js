@@ -25,6 +25,7 @@ var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
+  confirm("Your password must contain at least 8 characters (no more than 128) and also include at least 1 element of the following types:\nLowercase letter,\nUppercase letter, \nNumber and/or\nSpecial character. ")
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
@@ -40,9 +41,7 @@ generateBtn.addEventListener("click", writePassword);
 
 function generatePassword() {
   // Window Prompts and Confirm messages:
-  confirm("Your password must contain at least 8 characters (no more than 128) and also include at least 1 element of the following types:\nLowercase letter,\nUppercase letter, \nNumber and/or\nSpecial character. ")
   var passwordLength = prompt("Please enter the number of characters (OBS. It requires a minimum of 8 characters and maximun of 128");
-
   //* If statement - to check the User's input - If the user selects a number in the correct interval: 8 to 128, than the window prompts will continue. 
   if ((passwordLength >= 8) && (passwordLength <= 128)) {
     var lowerCaseUser = confirm("Would you like to include lowercase letters in your new password?");
@@ -108,8 +107,8 @@ function generatePassword() {
         //* If statement in case the user does not select a Character type:
 
       } else if (lowerCaseUser === false && numbersUser === false && UpperCaseUser === false && specialCharactersUser === false) {
-        var randomAlert = "ALERT: please click the red button 'Generate Password' again and choose at least 1 character type";
-        randomPassword = randomAlert;
+        alert("You didn't select a character type. Please re-enter the number of characters and make sure to select at least one character type");
+        return generatePassword();
 
 
         //* Else - for all the other alternatives - in this case when the user chooses to include Numbers
