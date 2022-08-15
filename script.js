@@ -2,7 +2,7 @@
 
 var lowerCase = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 var UpperCase = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
-var numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+var numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 var specialCharacters = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "+", "-", ".", "`", "~", "|", "<", ">", "=", "-", "_"]
 
 // Random Variables - lowerCase, UpperCase, numbers and special Characters//
@@ -10,7 +10,7 @@ var specialCharacters = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "+", 
 var randomLowerCase = lowerCase[Math.floor(Math.random() * lowerCase.length)];
 var randomUpperCase = UpperCase[Math.floor(Math.random() * UpperCase.length)];
 var randomNumbers = numbers[Math.floor(Math.random() * numbers.length)];
-var randomSpecialCharacters = specialCharacters [Math.floor(Math.random() * specialCharacters.length)];
+var randomSpecialCharacters = specialCharacters[Math.floor(Math.random() * specialCharacters.length)];
 
 // Console.log random variables - check if it's working in the console //
 
@@ -36,120 +36,102 @@ function writePassword() {
 generateBtn.addEventListener("click", writePassword);
 
 
-
 // Function - Generate Password //
 
-function generatePassword () {
+function generatePassword() {
+  // Window Prompts and Confirm messages:
+  confirm("Your password must contain at least 8 characters (no more than 128) and also include at least 1 element of the following types:\nLowercase letter,\nUppercase letter, \nNumber and/or\nSpecial character. ")
+  var passwordLength = prompt("Please enter the number of characters (OBS. It requires a minimum of 8 characters and maximun of 128");
 
-// Window Prompts and Confirm messages:
+  //* If statement - to check the User's input - If the user selects a number in the correct interval: 8 to 128, than the window prompts will continue. 
+  if ((passwordLength >= 8) && (passwordLength <= 128)) {
+    var lowerCaseUser = confirm("Would you like to include lowercase letters in your new password?");
+    var UpperCaseUser = confirm("Would you like to include UPPERCASE leters in your password?");
+    var numbersUser = confirm("Would you like to include numbers in your new password?");
+    var specialCharactersUser = confirm("Would you like to include special characters in your new password?");
+    // Variables to track the user's response.//
+    // "passwordCount" variable refers to the total number of characters that will be included in the Password, depending on the user's choice //
+    var passwordCount = 0;
+    var lowerCaseCount = "";
+    var UpperCaseCount = "";
+    var numbersCount = "";
+    var specialCharactersCount = "";
 
-confirm ("Your password must contain at least 8 characters (no more than 128) and also include at least 1 element of the following types:\nLowercase letter,\nUppercase letter, \nNumber and/or\nSpecial character. ")
-var passwordLength = prompt("Please enter the number of characters (OBS. It requires a minimum of 8 characters and maximun of 128");
-var lowerCaseUser = confirm("Would you like to include lowercase letters in your new password?");
-var UpperCaseUser = confirm("Would you like to include UPPERCASE leters in your password?");
-var numbersUser = confirm ("Would you like to include numbers in your new password?");
-var specialCharactersUser = confirm ("Would you like to include special characters in your new password?")
+    // If statements for each Character type. If they are chosen by the user, it will have an increment in the passwordCount variable//
 
-// Variables to track the user's response.//
-// "passwordCount" variable refers to the total number of characters that will be included in the Password, depending on the user's choice //
+    if (lowerCaseUser) {
+      lowerCaseCount = randomLowerCase;
+      passwordCount++;
+    }
 
-var passwordCount = 0
-var lowerCaseCount = "";
-var UpperCaseCount = "";
-var numbersCount = "";
-var specialCharactersCount="";
+    if (UpperCaseUser) {
+      UpperCaseCount = randomUpperCase;
+      passwordCount++;
+    }
 
+    if (numbersUser) {
+      numbersCount = randomNumbers;
+      passwordCount++;
+    }
 
-// If statements for each Character type. If they are chosen by the user, it will have an increment in the passwordCount variable//
-  
-if (lowerCaseUser) {
-  lowerCaseCount = randomLowerCase;
-  passwordCount++;
-} 
+    if (specialCharactersUser) {
+      specialCharactersCount = randomSpecialCharacters;
+      passwordCount++;
+    }
 
-if (UpperCaseUser) {
-  UpperCaseCount = randomUpperCase;
-  passwordCount++;
-}
+    // Loop to get random Characters:
 
-if (numbersUser) {
-  numbersCount = randomNumbers;
-  passwordCount++;
-}
+    var randomPassword = "";
 
-if (specialCharactersUser){
-  specialCharactersCount = randomSpecialCharacters;
-  passwordCount++;
-}
+    for (var i = 0; i < passwordLength - passwordCount; i++) {
 
+      //* If statement - in case the user decides not to include Numbers in the password *//  
 
-// Loop to get random Characters:
+      if (numbersUser === false && lowerCaseUser === true) {
+        var randomNoNumber = lowerCase[Math.floor(Math.random() * lowerCase.length)]
+        randomPassword += randomNoNumber;
 
-var randomPassword = "";
+        //* If statement - in case user decides not to include Numbers and Lower Case. ONLY Upper Case
 
-for (var i = 0; i < passwordLength - passwordCount; i++) {
-
-//* Included an if statement in case the user decides not to include Numbers in the password *//  
-
-  if (numbersUser===false && lowerCaseUser===true) {
-    var randomNoNumber = lowerCase[Math.floor(Math.random() * lowerCase.length)]
-    randomPassword += randomNoNumber;
-
-//* Included another if statement in case user decides not to include Numbers and Lower Case. ONLY Upper Case
-
-  } else if (lowerCaseUser===false && numbersUser===false && UpperCaseUser===true ) {
-    var randomNoNumberLower = UpperCase[Math.floor(Math.random() * UpperCase.length)]
-    randomPassword += randomNoNumberLower;
+      } else if (lowerCaseUser === false && numbersUser === false && UpperCaseUser === true) {
+        var randomNoNumberLower = UpperCase[Math.floor(Math.random() * UpperCase.length)]
+        randomPassword += randomNoNumberLower;
 
 
-//* If statement in case user decides to include ONLY special charcaters
+        //* If statement in case user decides to include ONLY special charcaters
 
-  } else if (lowerCaseUser===false && numbersUser===false && UpperCaseUser===false && specialCharacters===true) {
-    var randomOnlySpecial = specialCharacters[Math.floor(Math.random() * specialCharacters.length)]
-    randomPassword += randomOnlySpecial;
+      } else if (lowerCaseUser === false && numbersUser === false && UpperCaseUser === false && specialCharacters === true) {
+        var randomOnlySpecial = specialCharacters[Math.floor(Math.random() * specialCharacters.length)]
+        randomPassword += randomOnlySpecial;
 
 
-//* If statement in case the user does not select a Character type:
+        //* If statement in case the user does not select a Character type:
 
-  } else if (lowerCaseUser===false && numbersUser===false && UpperCaseUser===false && specialCharactersUser===false){
-  var randomAlert = "ALERT: please click the red button 'Generate Password' again and choose at least 1 character type";
-  randomPassword = randomAlert;
+      } else if (lowerCaseUser === false && numbersUser === false && UpperCaseUser === false && specialCharactersUser === false) {
+        var randomAlert = "ALERT: please click the red button 'Generate Password' again and choose at least 1 character type";
+        randomPassword = randomAlert;
 
-  
-//* Else - for all the other alternatives - in this case when the user chooses Number
-  } else{
-    var randomCharacters = numbers[Math.floor(Math.random() * numbers.length)];
-    randomPassword += randomCharacters;
+
+        //* Else - for all the other alternatives - in this case when the user chooses to include Numbers
+      } else {
+        var randomCharacters = numbers[Math.floor(Math.random() * numbers.length)];
+        randomPassword += randomCharacters;
+      }
+
+    }
+
+    // LowerCase, Upper Case and Special Characters inside the Password //
+    randomPassword += lowerCaseCount;
+    randomPassword += UpperCaseCount;
+    randomPassword += numbersCount;
+    randomPassword += specialCharactersCount;
+
+    return randomPassword;
+
+    //* In case user inputs an invalid number quantity or any other character:
+
+  } else {
+    alert("Please enter a valid NUMBER from 8 to 128");
+    return generatePassword();
   }
-         
-  }
-
-// LowerCase, Upper Case and Special Characters inside the Password //
-  randomPassword += lowerCaseCount;
-  randomPassword += UpperCaseCount;
-  randomPassword += numbersCount;
-  randomPassword += specialCharactersCount;
-
-  
-  return randomPassword;
-
 }
-
-
-
-
-
-
-//for (var i = 0; i < (passwordLength - passwordCount); i++);
- // if (!numbersUser){
-//    var randomNoNumber = lowerCase[Math.floor(Math.random() * lowerCase.length)];
-  
-//    randomPassword += randomNoNumber;
-
-  
-//} else { 
-//  var randomCharacters = Math.floor(Math.random() * 10);
-
-
-
-
