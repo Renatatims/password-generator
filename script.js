@@ -83,7 +83,6 @@ if (specialCharactersUser){
 }
 
 
-
 // Loop to get random Characters:
 
 var randomPassword = "";
@@ -96,7 +95,7 @@ for (var i = 0; i < passwordLength - passwordCount; i++) {
     var randomNoNumber = lowerCase[Math.floor(Math.random() * lowerCase.length)]
     randomPassword += randomNoNumber;
 
-//* Included another if statement in case user decides not to include Numbers and Lower Case
+//* Included another if statement in case user decides not to include Numbers and Lower Case. ONLY Upper Case
 
   } else if (lowerCaseUser===false && numbersUser===false && UpperCaseUser===true ) {
     var randomNoNumberLower = UpperCase[Math.floor(Math.random() * UpperCase.length)]
@@ -105,11 +104,19 @@ for (var i = 0; i < passwordLength - passwordCount; i++) {
 
 //* If statement in case user decides to include ONLY special charcaters
 
-  } else if (lowerCaseUser===false && numbersUser===false && UpperCaseUser===false) {
+  } else if (lowerCaseUser===false && numbersUser===false && UpperCaseUser===false && specialCharacters===true) {
     var randomOnlySpecial = specialCharacters[Math.floor(Math.random() * specialCharacters.length)]
     randomPassword += randomOnlySpecial;
 
-//* Else - for all the other alternatives
+
+//* If statement in case the user does not select a Character type:
+
+  } else if (lowerCaseUser===false && numbersUser===false && UpperCaseUser===false && specialCharactersUser===false){
+  var randomAlert = "ALERT: please click the red button 'Generate Password' again and choose at least 1 character type";
+  randomPassword = randomAlert;
+
+  
+//* Else - for all the other alternatives - in this case when the user chooses Number
   } else{
     var randomCharacters = numbers[Math.floor(Math.random() * numbers.length)];
     randomPassword += randomCharacters;
@@ -123,7 +130,9 @@ for (var i = 0; i < passwordLength - passwordCount; i++) {
   randomPassword += numbersCount;
   randomPassword += specialCharactersCount;
 
+  
   return randomPassword;
+
 }
 
 
