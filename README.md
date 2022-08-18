@@ -39,6 +39,8 @@ Example below: password is generated without numbers and Uppercase letters (only
 
 ## Link to application available at:
 
+URL: https://renatatims.github.io/password-generator/
+
 
 
 
